@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub pages
-      - run: ./deploy.sh
+        run: ./deploy.sh
