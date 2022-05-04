@@ -23,7 +23,7 @@
       <label for="image-link-input">Image</label>
       <button @click="uploadImage">Upload</button>
       <input id="image-link-input" type="url" v-model="formData.imageLink">
-      <span class="mdi mdi-close clear-button" @click="clearRating"></span>
+      <span class="mdi mdi-close clear-button" @click="clearImageLink"></span>
     </div>
     <div>
       <input type="reset">
@@ -52,6 +52,10 @@ export default {
     },
     clearRating() {
       this.formData.rating = undefined
+      this.$emit('update:modelValue', this.formData)
+    },
+    clearImageLink() {
+      this.formData.imageLink = undefined
       this.$emit('update:modelValue', this.formData)
     },
     uploadImage() {
