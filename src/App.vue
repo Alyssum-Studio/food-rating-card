@@ -10,13 +10,13 @@
       </div>
       <div class="col-50">
         <h2>Preview</h2>
-        <FoodScorecard :food-info="foodInfo"></FoodScorecard>
+        <FoodScorecard :food-info="foodInfo" ref="food-scorecard"></FoodScorecard>
       </div>
     </div>
     <div class="row">
       <div>
         <h2>Download or Share</h2>
-        <button>Download PNG</button>
+        <button @click="downloadScorecard">Download PNG</button>
         <button>Generate link</button>
       </div>
     </div>
@@ -24,15 +24,24 @@
 </template>
 
 <script>
+import domToImage from "dom-to-image";
+import { saveAs } from "file-saver";
+import {getExample} from "@/models";
 import FoodInfoForm from "@/components/FoodInfoForm";
 import FoodScorecard from "@/components/FoodScorecard";
-import {getExample} from "@/models";
 export default {
   name: 'App',
   components: {FoodScorecard, FoodInfoForm},
   data() {
     return {
       foodInfo: getExample()
+    }
+  },
+  methods: {
+    async downloadScorecard() {
+      const targetDom = this.$refs["food-scorecard"].$el
+      const blob = await domToImage.toBlob(targetDom)
+      saveAs(blob, `${this.foodInfo.name}.png`)
     }
   }
 }
