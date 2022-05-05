@@ -16,8 +16,14 @@
     <div class="row">
       <div>
         <h2>Download or Share</h2>
-        <button @click="downloadScorecard">Download PNG</button>
-        <button @click="uploadScorecard">Generate link</button>
+        <button @click="downloadScorecard">
+          <span class="mdi mdi-download"></span>
+          Download
+        </button>
+        <button @click="uploadScorecard">
+          <span class="mdi mdi-share-variant"></span>
+          Share
+        </button>
         <div>
           <label for="generated-link-input">Link: </label>
           <input id="generated-link-input" type="url" v-model="generatedLink">
