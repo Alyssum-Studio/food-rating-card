@@ -17,7 +17,12 @@
       <div>
         <h2>Download or Share</h2>
         <button @click="downloadScorecard">Download PNG</button>
-        <button>Generate link</button>
+        <button @click="uploadScorecard">Generate link</button>
+        <div>
+          <label for="generated-link-input">Link: </label>
+          <input id="generated-link-input" type="url" v-model="generatedLink">
+          <button @click="copyLinkToClipboard">Copy</button>
+        </div>
       </div>
     </div>
   </main>
@@ -26,6 +31,7 @@
 <script>
 import domToImage from "dom-to-image";
 import { saveAs } from "file-saver";
+import * as imgur from "@/adapters/imgur";
 import {getExample} from "@/models";
 import FoodInfoForm from "@/components/FoodInfoForm";
 import FoodScorecard from "@/components/FoodScorecard";
@@ -34,7 +40,8 @@ export default {
   components: {FoodScorecard, FoodInfoForm},
   data() {
     return {
-      foodInfo: getExample()
+      foodInfo: getExample(),
+      generatedLink: "",
     }
   },
   methods: {
@@ -42,6 +49,14 @@ export default {
       const targetDom = this.$refs["food-scorecard"].$el
       const blob = await domToImage.toBlob(targetDom)
       saveAs(blob, `${this.foodInfo.name}.png`)
+    },
+    async uploadScorecard() {
+      const targetDom = this.$refs["food-scorecard"].$el
+      const blob = await domToImage.toBlob(targetDom)
+      this.generatedLink = await imgur.upload(blob)
+    },
+    copyLinkToClipboard() {
+      navigator.clipboard.writeText(this.generatedLink)
     }
   }
 }

@@ -21,19 +21,21 @@
     </div>
     <div>
       <label for="image-link-input">Image</label>
-      <button @click="uploadImage">Upload</button>
       <input id="image-link-input" type="url" v-model="formData.imageLink">
       <span class="mdi mdi-close clear-button" @click="clearImageLink"></span>
+      <label class="file-label" for="upload-image-input">Upload</label>
+      <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
     </div>
     <div>
-      <input type="reset">
-      <input type="button" value="Example" @click="setExample">
+      <button type="reset">Reset</button>
+      <button @click="setExample">Example</button>
     </div>
   </form>
 </template>
 
 <script>
 import {FoodInfo, getExample} from "@/models";
+import * as imgur from "@/adapters/imgur";
 
 export default {
   name: "FoodInfoForm",
@@ -58,7 +60,9 @@ export default {
       this.formData.imageLink = undefined
       this.$emit('update:modelValue', this.formData)
     },
-    uploadImage() {
+    async uploadImage(event) {
+      const imageFile = event.target.files[0]
+      this.formData.imageLink = await imgur.upload(imageFile)
       this.$emit('update:modelValue', this.formData)
     },
     reset() {
@@ -89,6 +93,21 @@ export default {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.food-info-form input[type="file"] {
+  display: none;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
 }
 
 .rating-star {
