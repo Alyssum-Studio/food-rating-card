@@ -1,13 +1,15 @@
 <template>
   <form class="food-info-form" @input="$emit('update:modelValue', formData)" @reset="reset">
     <div>
-      <label for="name-input">Name</label>
-      <input id="name-input" type="text" v-model.trim="formData.name" required>
+      <label for="image-link-input">Image</label>
+      <input id="image-link-input" type="url" v-model="formData.imageLink">
+      <span class="mdi mdi-close clear-button" @click="clearImageLink"></span>
+      <label class="file-label" for="upload-image-input">Upload</label>
+      <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
     </div>
     <div>
-      <label for="price-input">Price</label>
-      <input id="price-input" type="number" v-model.number="formData.price" min="0">
-      <span class="mdi mdi-close clear-button" @click="clearPrice"></span>
+      <label for="name-input">Name</label>
+      <input id="name-input" type="text" v-model.trim="formData.name" required>
     </div>
     <div>
       <label>Rating</label>
@@ -20,15 +22,25 @@
       <span class="mdi mdi-close clear-button" @click="clearRating"></span>
     </div>
     <div>
-      <label for="image-link-input">Image</label>
-      <input id="image-link-input" type="url" v-model="formData.imageLink">
-      <span class="mdi mdi-close clear-button" @click="clearImageLink"></span>
-      <label class="file-label" for="upload-image-input">Upload</label>
-      <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
+      <label for="price-input">Price</label>
+      <input id="price-input" type="number" v-model.number="formData.price" min="0">
+      <span class="mdi mdi-close clear-button" @click="clearPrice"></span>
+    </div>
+    <div>
+      <label for="spicy-checkbox">
+        <span class="mdi mdi-fire"></span>
+        Spicy
+      </label>
+      <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
+      <label for="vegetarian-checkbox">
+        <span class="mdi mdi-leaf"></span>
+        Vegetarian
+      </label>
+      <input id="vegetarian-checkbox" type="checkbox" v-model="formData.vegetarian">
     </div>
     <div>
       <button type="reset">Reset</button>
-      <button @click="setExample">Example</button>
+      <button @click="setExample" @click.prevent>Example</button>
     </div>
   </form>
 </template>
