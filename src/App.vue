@@ -32,15 +32,15 @@
 import domToImage from "dom-to-image";
 import { saveAs } from "file-saver";
 import * as imgur from "@/adapters/imgur";
-import {getExample} from "@/models";
 import FoodInfoForm from "@/components/FoodInfoForm";
 import FoodScorecard from "@/components/FoodScorecard";
+import {FoodInfo} from "@/models";
 export default {
   name: 'App',
   components: {FoodScorecard, FoodInfoForm},
   data() {
     return {
-      foodInfo: getExample(),
+      foodInfo: new FoodInfo(),
       generatedLink: "",
     }
   },
