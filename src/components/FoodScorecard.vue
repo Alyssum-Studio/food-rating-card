@@ -1,7 +1,7 @@
 <template>
   <div class="food-scorecard">
     <img :src="foodInfo.imageLink || require('../assets/food-placeholder.png')" :alt="`${foodInfo.name}`">
-    <div class="food-info">
+    <div class="food-info" v-if="foodInfo.name || foodInfo.rating">
       <h4>
         <span v-if="foodInfo.spicy" class="mdi mdi-fire"></span>
         <span v-if="foodInfo.vegetarian" class="mdi mdi-leaf"></span>
@@ -33,7 +33,6 @@ export default {
 <style scoped>
 .food-scorecard {
   position: relative;
-  border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -43,7 +42,8 @@ export default {
 }
 
 .food-scorecard img{
-  width: 400px;
+  display: block;
+  max-width: 100%;
 }
 
 .food-scorecard .mdi-fire {

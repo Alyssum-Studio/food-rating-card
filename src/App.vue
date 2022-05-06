@@ -4,33 +4,35 @@
   </header>
   <main>
     <div class="row">
-      <div class="col-50">
+      <section class="col-50">
         <h2>Edit</h2>
         <FoodInfoForm v-model="foodInfo"></FoodInfoForm>
-      </div>
-      <div class="col-50">
+      </section>
+      <section class="col-50">
         <h2>Preview</h2>
-        <FoodScorecard :food-info="foodInfo" ref="food-scorecard"></FoodScorecard>
-      </div>
+        <FoodScorecard :food-info="foodInfo" ref="new-scorecard"></FoodScorecard>
+      </section>
     </div>
-    <div class="row">
-      <div>
-        <h2>Download or Share</h2>
-        <button @click="downloadScorecard">
-          <span class="mdi mdi-download"></span>
-          Download
-        </button>
-        <button @click="uploadScorecard">
-          <span class="mdi mdi-share-variant"></span>
-          Share
-        </button>
+    <section class="row">
+      <h2>Download or Share</h2>
+      <button @click="downloadScorecard">
+        <span class="mdi mdi-download"></span>
+        Download
+      </button>
+      <button @click="uploadScorecard">
+        <span class="mdi mdi-share-variant"></span>
+        Share
+      </button>
+      <div v-if="generatedLink">
+        <p class="success-text">Upload success!</p>
         <div>
           <label for="generated-link-input">Link: </label>
           <input id="generated-link-input" type="url" v-model="generatedLink">
           <button @click="copyLinkToClipboard">Copy</button>
         </div>
+        <img :src="generatedLink" alt="generated-image">
       </div>
-    </div>
+    </section>
   </main>
 </template>
 
@@ -52,12 +54,12 @@ export default {
   },
   methods: {
     async downloadScorecard() {
-      const targetDom = this.$refs["food-scorecard"].$el
+      const targetDom = this.$refs["new-scorecard"].$el
       const blob = await domToImage.toBlob(targetDom)
       saveAs(blob, `${this.foodInfo.name}.png`)
     },
     async uploadScorecard() {
-      const targetDom = this.$refs["food-scorecard"].$el
+      const targetDom = this.$refs["new-scorecard"].$el
       const blob = await domToImage.toBlob(targetDom)
       this.generatedLink = await imgur.upload(blob)
     },
@@ -78,9 +80,9 @@ export default {
 }
 
 header {
-  padding: 40px; /* some padding */
-  text-align: center; /* center the text */
-  background: wheat; /* green background */
+  padding: 40px;
+  text-align: center;
+  background: wheat;
 }
 
 .row:after {
@@ -96,8 +98,12 @@ header {
 }
 
 main {
-  min-width: 800px;
-  margin: 30px 25%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.success-text {
+  color: green;
 }
 
 </style>

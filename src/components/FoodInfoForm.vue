@@ -27,16 +27,16 @@
       <span class="mdi mdi-close clear-button" @click="clearPrice"></span>
     </div>
     <div>
+      <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
       <label for="spicy-checkbox">
         <span class="mdi mdi-fire"></span>
         Spicy
       </label>
-      <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
+      <input id="vegetarian-checkbox" type="checkbox" v-model="formData.vegetarian">
       <label for="vegetarian-checkbox">
         <span class="mdi mdi-leaf"></span>
         Vegetarian
       </label>
-      <input id="vegetarian-checkbox" type="checkbox" v-model="formData.vegetarian">
     </div>
     <div>
       <button type="reset">Reset</button>

@@ -1,4 +1,12 @@
-# food-scorecard
+# Food Scorecard
+
+---
+
+Food Scorecard is a simple image generator.
+
+## Live demo
+
+[Link](https://alyssum-studio.github.io/food-scorecard/)
 
 ## Project setup
 ```
