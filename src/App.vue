@@ -1,25 +1,32 @@
 <template>
   <header>
-    <h1>Food Scorecard</h1>
+    <h1>Food Rating Card</h1>
   </header>
   <main>
     <div class="row">
       <section class="col-50">
         <h2>Edit</h2>
-        <FoodInfoForm v-model="foodInfo"></FoodInfoForm>
+        <FoodRatingForm
+            v-model="foodRating"
+            style="box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);"
+        ></FoodRatingForm>
       </section>
       <section class="col-50">
         <h2>Preview</h2>
-        <FoodScorecard :food-info="foodInfo" ref="new-scorecard"></FoodScorecard>
+        <FoodRatingCard
+            ref="new-rating-card"
+            :food-rating="foodRating"
+            style="box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);"
+        ></FoodRatingCard>
       </section>
     </div>
     <section class="row">
       <h2>Download or Share</h2>
-      <button @click="downloadScorecard">
+      <button @click="downloadRatingCard">
         <span class="mdi mdi-download"></span>
         Download
       </button>
-      <button @click="uploadScorecard">
+      <button @click="uploadRatingCard">
         <span class="mdi mdi-share-variant"></span>
         Share
       </button>
@@ -40,28 +47,28 @@
 import domToImage from "dom-to-image";
 import { saveAs } from "file-saver";
 import * as imgur from "@/adapters/imgur";
-import FoodInfoForm from "@/components/FoodInfoForm";
-import FoodScorecard from "@/components/FoodScorecard";
-import {FoodInfo} from "@/models";
+import FoodRatingForm from "@/components/FoodRatingForm";
+import FoodRatingCard from "@/components/FoodRatingCard";
+import {FoodRating} from "@/models";
 export default {
   name: 'App',
-  components: {FoodScorecard, FoodInfoForm},
+  components: {FoodRatingCard, FoodRatingForm},
   data() {
     return {
-      foodInfo: new FoodInfo(),
+      foodRating: new FoodRating(),
       generatedLink: "",
     }
   },
   methods: {
-    async downloadScorecard() {
-      const targetDom = this.$refs["new-scorecard"].$el
+    async downloadRatingCard() {
+      const targetDom = this.$refs["new-rating-card"].$el
       const blob = await domToImage.toBlob(targetDom)
-      saveAs(blob, `${this.foodInfo.name}.png`)
+      saveAs(blob, `${this.foodRating.name}.png`)
     },
-    async uploadScorecard() {
-      const targetDom = this.$refs["new-scorecard"].$el
+    async uploadRatingCard() {
+      const targetDom = this.$refs["new-rating-card"].$el
       const blob = await domToImage.toBlob(targetDom)
-      this.generatedLink = await imgur.upload(blob)
+      this.generatedLink = await imgur.uploadImage(blob)
     },
     copyLinkToClipboard() {
       navigator.clipboard.writeText(this.generatedLink)
@@ -70,36 +77,32 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
+<style scoped>
 header {
-  padding: 40px;
-  text-align: center;
+  padding: 10px;
   background: wheat;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.col-50 {
-  float: left;
-  width: 46%;
-  padding: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 main {
   max-width: 800px;
-  margin: auto;
+  background: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: 50px auto;
+  padding: 50px;
+}
+
+.row {
+  display: table;
+  width: 100%;
+}
+
+.col-50 {
+  display: table-cell;
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .success-text {

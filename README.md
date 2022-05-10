@@ -1,8 +1,8 @@
-# Food Scorecard
+# Food Rating Card
 
 ---
 
-Food Scorecard is a simple image generator.
+Food Rating Card is a simple image generator.
 
 ## Live demo
 

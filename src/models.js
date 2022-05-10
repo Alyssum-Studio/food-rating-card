@@ -1,7 +1,8 @@
-class FoodInfo {
-  constructor(name, rating, price, spicy=false, vegetarian=false, imageLink) {
+class FoodRating {
+  constructor(name, rating, ratingStyle="star", price, spicy=false, vegetarian=false, imageLink) {
     this.name = name
     this.rating = rating
+    this.ratingStyle = ratingStyle
     this.price = price
     this.spicy = spicy
     this.vegetarian = vegetarian
@@ -9,10 +10,11 @@ class FoodInfo {
   }
 }
 
-function getExample() {
-  return new FoodInfo(
+function getFoodRatingExample() {
+  return new FoodRating(
     "Cheeseburger",
     3,
+    "star",
     100,
     false,
     false,
@@ -20,4 +22,4 @@ function getExample() {
   )
 }
 
-export {FoodInfo, getExample}
+export {FoodRating, getFoodRatingExample}

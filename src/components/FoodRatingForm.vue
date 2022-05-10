@@ -1,9 +1,9 @@
 <template>
-  <form class="food-info-form" @input="$emit('update:modelValue', formData)" @reset="reset">
+  <form class="food-rating-form" @input="$emit('update:modelValue', formData)" @reset="reset">
     <div>
       <label for="image-link-input">Image</label>
       <input id="image-link-input" type="url" v-model="formData.imageLink">
-      <span class="mdi mdi-close clear-button" @click="clearImageLink"></span>
+      <span class="mdi mdi-close clear-button" @click="clearField('imageLink')"></span>
       <label class="file-label" for="upload-image-input">Upload</label>
       <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
     </div>
@@ -19,12 +19,12 @@
             :style="{color: formData.rating >= i ? 'darkorange': 'black'}"
             @click="formData.rating = i"
       ></span>
-      <span class="mdi mdi-close clear-button" @click="clearRating"></span>
+      <span class="mdi mdi-close clear-button" @click="clearField('rating')"></span>
     </div>
     <div>
       <label for="price-input">Price</label>
       <input id="price-input" type="number" v-model.number="formData.price" min="0">
-      <span class="mdi mdi-close clear-button" @click="clearPrice"></span>
+      <span class="mdi mdi-close clear-button" @click="clearField('price')"></span>
     </div>
     <div>
       <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
@@ -46,13 +46,13 @@
 </template>
 
 <script>
-import {FoodInfo, getExample} from "@/models";
+import {FoodRating, getFoodRatingExample} from "@/models";
 import * as imgur from "@/adapters/imgur";
 
 export default {
-  name: "FoodInfoForm",
+  name: "FoodRatingForm",
   props: {
-    modelValue: FoodInfo
+    modelValue: FoodRating
   },
   data() {
     return {
@@ -60,29 +60,21 @@ export default {
     }
   },
   methods: {
-    clearPrice() {
-      this.formData.price = undefined
-      this.$emit('update:modelValue', this.formData)
-    },
-    clearRating() {
-      this.formData.rating = undefined
-      this.$emit('update:modelValue', this.formData)
-    },
-    clearImageLink() {
-      this.formData.imageLink = undefined
-      this.$emit('update:modelValue', this.formData)
-    },
     async uploadImage(event) {
       const imageFile = event.target.files[0]
-      this.formData.imageLink = await imgur.upload(imageFile)
+      this.formData.imageLink = await imgur.uploadImage(imageFile)
+      this.$emit('update:modelValue', this.formData)
+    },
+    clearField(fieldName) {
+      this.formData[fieldName] = undefined
       this.$emit('update:modelValue', this.formData)
     },
     reset() {
-      this.formData = new FoodInfo()
+      this.formData = new FoodRating()
       this.$emit('update:modelValue', this.formData)
     },
     setExample() {
-      this.formData = getExample()
+      this.formData = getFoodRatingExample()
       this.$emit('update:modelValue', this.formData)
     }
   },
@@ -90,7 +82,7 @@ export default {
 </script>
 
 <style scoped>
-.food-info-form {
+.food-rating-form {
   background: #f2f2f2;
   border: 1px solid lightgrey;
   border-radius: 3px;
@@ -98,7 +90,7 @@ export default {
   text-align: left;
 }
 
-.food-info-form input, select {
+input, select {
   padding: 5px;
   margin: 8px;
   display: inline-block;
@@ -107,7 +99,7 @@ export default {
   box-sizing: border-box;
 }
 
-.food-info-form input[type="file"] {
+input[type="file"] {
   display: none;
 }
 
