@@ -8,7 +8,6 @@
         <h2>Edit</h2>
         <FoodRatingForm
             v-model="foodRating"
-            style="box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);"
         ></FoodRatingForm>
       </section>
       <section class="col-50">
@@ -16,7 +15,6 @@
         <FoodRatingCard
             ref="new-rating-card"
             :food-rating="foodRating"
-            style="box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);"
         ></FoodRatingCard>
       </section>
     </div>
@@ -81,13 +79,13 @@ export default {
 header {
   padding: 10px;
   background: wheat;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 main {
   max-width: 800px;
   background: #ffffff;
-  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
   margin: 50px auto;
   padding: 50px;
