@@ -36,12 +36,12 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.food-scorecard h4 {
+h4 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.food-scorecard img{
+img{
   display: block;
   max-width: 100%;
 }
@@ -50,11 +50,11 @@ export default {
   color: tomato;
 }
 
-.food-scorecard .mdi-leaf {
+.mdi-leaf {
   color: greenyellow;
 }
 
-.food-scorecard .food-info {
+.food-info {
   position: absolute;
   bottom: 10px;
   right: 10px;
