@@ -29,7 +29,7 @@
     <div>
       <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
       <label for="spicy-checkbox">
-        <span class="mdi mdi-fire"></span>
+        <span class="mdi mdi-chili-mild"></span>
         Spicy
       </label>
       <input id="vegetarian-checkbox" type="checkbox" v-model="formData.vegetarian">

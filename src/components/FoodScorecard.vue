@@ -3,7 +3,7 @@
     <img :src="foodInfo.imageLink || require('../assets/food-placeholder.png')" :alt="`${foodInfo.name}`">
     <div class="food-info" v-if="foodInfo.name || foodInfo.rating">
       <h4>
-        <span v-if="foodInfo.spicy" class="mdi mdi-fire"></span>
+        <span v-if="foodInfo.spicy" class="mdi mdi-chili-mild"></span>
         <span v-if="foodInfo.vegetarian" class="mdi mdi-leaf"></span>
         {{ foodInfo.name }}
         <span v-if="foodInfo.price !== undefined"> - ${{foodInfo.price}}</span>
@@ -46,7 +46,7 @@ export default {
   max-width: 100%;
 }
 
-.food-scorecard .mdi-fire {
+.mdi-chili-mild {
   color: tomato;
 }
 
