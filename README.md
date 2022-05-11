@@ -6,7 +6,7 @@ Food Rating Card is a simple image generator.
 
 ## Live demo
 
-[Link](https://alyssum-studio.github.io/food-scorecard/)
+[Link](https://alyssum-studio.github.io/food-rating-card/)
 
 ## Project setup
 ```
