@@ -78,13 +78,13 @@ export default {
 <style scoped>
 header {
   padding: 10px;
-  background: wheat;
+  background: bisque;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 main {
   max-width: 800px;
-  background: #ffffff;
+  background: whitesmoke;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
   margin: 50px auto;
