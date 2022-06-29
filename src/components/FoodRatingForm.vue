@@ -6,6 +6,7 @@
       <span class="mdi mdi-close clear-button" @click="clearField('imageLink')"></span>
       <label class="file-label" for="upload-image-input">Upload</label>
       <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
+      <input id="image-link-input" type="url" v-model="formData.imageLink">
     </div>
     <div>
       <label for="name-input">Name</label>
@@ -19,12 +20,10 @@
             :style="{color: formData.rating >= i ? 'darkorange': 'black'}"
             @click="formData.rating = i"
       ></span>
-      <span class="mdi mdi-close clear-button" @click="clearField('rating')"></span>
     </div>
     <div>
       <label for="price-input">Price</label>
       <input id="price-input" type="number" v-model.number="formData.price" min="0">
-      <span class="mdi mdi-close clear-button" @click="clearField('price')"></span>
     </div>
     <div>
       <input id="spicy-checkbox" type="checkbox" v-model="formData.spicy">
@@ -63,10 +62,6 @@ export default {
     async uploadImage(event) {
       const imageFile = event.target.files[0]
       this.formData.imageLink = await imgur.uploadImage(imageFile)
-      this.$emit('update:modelValue', this.formData)
-    },
-    clearField(fieldName) {
-      this.formData[fieldName] = undefined
       this.$emit('update:modelValue', this.formData)
     },
     reset() {
