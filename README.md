@@ -2,7 +2,7 @@
 
 ---
 
-Food Rating Card is a simple image generator.
+A tool that lets you create excellent food rating cards.
 
 ## Live demo
 
