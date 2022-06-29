@@ -3,10 +3,8 @@
     <div>
       <label for="image-link-input">Image</label>
       <input id="image-link-input" type="url" v-model="formData.imageLink">
-      <span class="mdi mdi-close clear-button" @click="clearField('imageLink')"></span>
       <label class="file-label" for="upload-image-input">Upload</label>
       <input id="upload-image-input" class="file-input" type="file" accept="image/*" @input="uploadImage">
-      <input id="image-link-input" type="url" v-model="formData.imageLink">
     </div>
     <div>
       <label for="name-input">Name</label>
